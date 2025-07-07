@@ -28,13 +28,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> titleList = ['Amazon', '楽天', 'Yahoo'];
-  int _counter = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
               ),
+              Image.asset('assets/images/sea.png', width: 40, height: 40),
               Divider(height: 0),
             ],
           );
@@ -73,6 +69,23 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
+      ),
+      drawer: Drawer(
+        elevation: 100,
+        child: SafeArea(child: Text("メニューを追加することができます")),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
+        ],
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+            print("タップされたのは$index");
+          });
+        },
       ),
     );
   }
